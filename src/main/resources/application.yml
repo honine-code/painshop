@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/painer?serverTimezon=Asia/Seoul
+    username: painshop
+    password: painshop
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  #
+  #  thymeleaf:
+  #    prefix: classpath:/templates/
+  #    suffix: .html
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+server:
+  port: 80

@@ -1,0 +1,57 @@
+/**
+    멤버
+ */
+.member-footer {
+    padding: 20px 0 40px;
+    text-align: center;
+    font-family: dotum,sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/**
+    멤버 생성
+ */
+.create-memeber-wrapper {
+    min-width: 290px;
+    max-width: 460px;
+    _width: 460px;
+    padding: 0 4.35%;
+    *padding: 0 20px;
+}
+
+.create-memeber-header {
+    padding: 10.27% 0 0;
+    margin: 1rem;
+    text-align: center;
+    color: black;
+}
+
+.create-memeber-header h2 {
+    font-size: 3rem;
+}
+
+.create-memeber-header h2 a {
+    color: black;
+}
+
+.create-member-btn {
+    font-size: 17px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    width: 100%;
+}
+
+.create-member-chk {
+    margin-top: 9px;
+    font-size: 12px;
+}
+
+.create-member-success {
+    color: #00891a;
+}
+.create-member-error {
+    color: #e52528;
+}

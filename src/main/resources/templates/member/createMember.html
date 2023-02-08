@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header" />
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+var id_Chk = false;
+var passChk = false;
+var nicChk = false;
+var createChk = false;
+
+var focus_Val = "";
+var focus_Id = "";
+var focus_Chk = "";
+var chkmsg = "";
+
+$(function(){
+    $("#passSuccess").hide();
+    $("#passError").hide();
+    $("#nickName_Chk").hide();
+    $("#email_Chk").hide();
+
+    $("input").focus(function() {
+        focus_Val = $(":focus").val();
+        focus_Id = $(":focus").attr("id");
+        focus_Chk = "#" + focus_Id + "_Chk";
+        chkmsg = "";
+
+        if (focus_Id == "id") {
+            chkmsg = "아이디를 입력해주세요.";
+        } else if (focus_Id == "nickName") {
+            chkmsg = "닉네임을 입력해주세요.";
+        }
+    });
+
+    $("input").focusout(function() {
+        if (focus_Val == "") {
+            $(focus_Chk).html(chkmsg);
+            $(focus_Chk).show();
+        } else {
+            $(focus_Chk).hide();
+        }
+    });
+
+    $("input").keyup(function() {
+        focus_Val = $("#" + focus_Id).val();
+        var id_Chk = $("#id").val();
+        var password = $("#password").val();
+        var password_Confim = $("#password_Confim").val();
+        var nickName_Chk = $("#nickName").val();
+
+        /* Check Dev */
+        if (focus_Val != "") {
+            $(focus_Chk).hide();
+        }
+        /*
+
+        /* Password Check */
+        if (password != "" && password_Confim != "") {
+            if (password == password_Confim) {
+
+                $("#password_Confim").html("비밀번호가 일치합니다.");
+                $("#passSuccess").show();
+
+                $("#password_Confim").removeAttr("style");
+                $("#passError").hide();
+                passChk = true;
+            } else {
+                $("#password_Confim").html("비밀번호가 일치하지 않습니다.");
+                $("#passSuccess").hide();
+
+                $("#password_Confim").css('outline','1px solid #e52528');
+                $("#passError").show();
+                passChk = false;
+            }
+        }
+
+        if (passChk == true) {
+            if (id_Chk != "" && nickName_Chk != "") {
+                createChk = true;
+            }
+        }
+    });
+});
+
+function createSubmit() {
+    if (createChk == true) {
+        alert("가입이 완료되었습니다.");
+        return true;
+    } else {
+        alert("가입정보를 확인해 주세요.");
+        return false;
+    }
+}
+</script>
+
+<body>
+<!--<div th:replace="fragments/top-menu :: header" />-->
+<div class="container create-memeber-wrapper">
+    <header class="create-memeber-header">
+        <h2>
+            <a href="/">PAIN SHOP</a>
+        </h2>
+    </header>
+
+    <form onsubmit="return createSubmit();" role="form" action="/member/new" th:object="${createForm}" method="post">
+        <div class="form-group">
+            <input type="text" th:field="*{memberId}" class="form-control" placeholder="아이디"
+                   th:class="${#fields.hasErrors('memberId')}? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}">Incorrect date</p>
+            <div class="create-member-chk">
+                <span class="create-member-error" id="memberId_Chk" name="memberId_Chk"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호"
+                   th:class="${#fields.hasErrors('password')}? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect date</p>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password_Confim" name="password_Confim" class="form-control" placeholder="비밀번호 확인">
+            <div class="create-member-chk">
+                <span class="create-member-success" id="passSuccess" name="passSuccess">비밀번호가 일치합니다.</span>
+                <span class="create-member-error" id="passError" name="passError">비밀번호가 일치하지 않습니다.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" th:field="*{nickName}" class="form-control" placeholder="닉네임"
+                   th:class="${#fields.hasErrors('nickName')}? 'form-control fieldError' : 'form-control'">
+            <div class="create-member-chk">
+<!--                <span th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}" class="create-member-error" id="nickName_Chk" name="nickName_Chk"></span>-->
+                <span class="create-member-error" id="nickName_Chk" name="nickName_Chk">닉네임을 입력해주세요.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" th:field="*{email}" class="form-control" placeholder="이메일"
+                   th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'">
+            <div class="create-member-chk">
+<!--                <span th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}" class="create-member-error" id="nickName_Chk" name="nickName_Chk"></span>-->
+                <span class="create-member-error" id="email_Chk" name="email_Chk">이메일을 입력해주세요.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" th:field="*{address}" class="form-control" placeholder="주소">
+        </div>
+<!--        <div class="form-group">-->
+<!--            <input type="text" th:field="*{address}" class="form-control" placeholder="주소">-->
+<!--        </div>-->
+        <button type="submit" class="btn create-member-btn">가입하기</button>
+    </form>
+    <br/>
+<!--    <div th:replace="old_fragments/footer :: footer" />-->
+</div> <!-- /container -->
+
+<!-- footer -->
+    <footer class="member-footer">
+        <div>Copyright &copy;<script>document.write(new Date().getFullYear());</script>  All rights reserved</div>
+    </footer>
+
+</body>
+</html>
