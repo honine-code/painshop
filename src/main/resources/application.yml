@@ -17,6 +17,8 @@ spring:
   #  thymeleaf:
   #    prefix: classpath:/templates/
   #    suffix: .html
+  main:
+    allow-bean-definition-overriding: true
 
   mvc:
     hiddenmethod:

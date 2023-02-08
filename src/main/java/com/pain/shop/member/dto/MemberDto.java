@@ -18,6 +18,7 @@ public class MemberDto {
     private String nickName;
     private String email;
     private String address;
+    private Role role;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -28,6 +29,8 @@ public class MemberDto {
                 .nickName(nickName)
                 .email(email)
                 .address(address)
+                .role(Role.USER)
+                .createDate(LocalDateTime.now())
                 .build();
     }
 

@@ -6,4 +6,5 @@ import com.pain.shop.member.dto.MemberDto;
 public interface MemberService {
 
     Long join(MemberDto memberDto);
+    String login(String memberId, String password);
 }
