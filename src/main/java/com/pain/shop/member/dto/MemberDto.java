@@ -22,6 +22,10 @@ public class MemberDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
+
     public Member toEntity(){
         return Member.builder()
                 .memberId(memberId)
@@ -29,7 +33,7 @@ public class MemberDto {
                 .nickName(nickName)
                 .email(email)
                 .address(address)
-                .role(Role.USER)
+                .role(Role.MEMBER)
                 .createDate(LocalDateTime.now())
                 .build();
     }

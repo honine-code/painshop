@@ -11,13 +11,12 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    Optional<MemberDto> findByEmail(String userEmail);
+    Optional<MemberDto> findByMemberId(String memberId);
 
     /**
-     * 회원아이디 찾기
+     * 회원 중복 조회
      */
-    @Query(value = "select member_id from member2 where member_id = :memberId", nativeQuery = true)
-    List<MemberDto> findByMemberId(@Param("memberId") String memberId);
+    boolean existsByMemberId(String memberId);
 
     /**
      * 회원 아이디, 패스워드 조회

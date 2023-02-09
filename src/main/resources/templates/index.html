@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: header" />
+<head th:replace="~{fragments/header :: header}" />
 
 <body>
-<div th:replace="fragments/top-menu :: top-menu" />
+<div th:replace="~{fragments/top-menu :: top-menu}" />
 
 <!-- Hero Section Begin -->
     <section class="hero">
@@ -533,7 +533,7 @@
     <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->
-    <footer th:replace="fragments/footer :: footer" />
+    <footer th:replace="~{fragments/footer :: footer}" />
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->

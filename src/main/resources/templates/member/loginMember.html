@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: header" />
+<head th:replace="~{fragments/header :: header}" />
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 var id_Chk = false;
@@ -104,6 +104,7 @@ function createSubmit() {
     </header>
 
     <form role="form" action="/member/login" th:object="${loginForm}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="form-group">
             <input type="text" th:field="*{memberId}" class="form-control" placeholder="아이디"
                    th:class="${#fields.hasErrors('memberId')}? 'form-control fieldError' : 'form-control'">
